@@ -61,7 +61,6 @@ class SCASimilarity(nn.Module):
         return self.log_temperature.exp()
 
     def _union_mask(self, visual_topic: torch.Tensor, text_topic: torch.Tensor) -> torch.Tensor:
-        # Equation (2). Indices are used instead of storing dense prototype-pair masks.
         shape = torch.broadcast_shapes(visual_topic.shape, text_topic.shape)
         visual_topic = visual_topic.expand(shape)
         text_topic = text_topic.expand(shape)
@@ -77,12 +76,10 @@ class SCASimilarity(nn.Module):
 
     @staticmethod
     def _word_topics(word_topic_ids: torch.Tensor, text_theta: torch.Tensor) -> torch.Tensor:
-        # Figure 5(b): dictionary hits use TSPC; misses use the text's TPD maximum.
         fallback = text_theta.argmax().expand_as(word_topic_ids)
         return torch.where(word_topic_ids >= 0, word_topic_ids, fallback)
 
     def initial_similarity(self, regions: torch.Tensor, words: torch.Tensor) -> torch.Tensor:
-        # Equations (12)-(13): word-referenced region attention in the original space.
         raw = _cosine_matrix(regions, words).clamp_min(0)
         normalized = F.normalize(raw, p=2, dim=1, eps=1e-8)
         beta = F.softmax(self.temperature * normalized, dim=0)
@@ -96,7 +93,6 @@ class SCASimilarity(nn.Module):
         word_topic_ids: torch.Tensor,
         text_theta: torch.Tensor,
     ) -> torch.Tensor:
-        # Equations (3)-(9) and Algorithm 2.
         base = _cosine_matrix(regions, words)
         region_topics = self._region_topics(regions)
         word_topics = self._word_topics(word_topic_ids, text_theta)
@@ -128,7 +124,6 @@ class SCASimilarity(nn.Module):
         image_theta: torch.Tensor,
         text_theta: torch.Tensor,
     ) -> torch.Tensor:
-        # Equations (10)-(11) and Algorithm 3.
         image_global = regions.mean(dim=0)
         text_global = words.mean(dim=0)
         image_values, image_topics = image_theta.topk(self.top_prototypes)

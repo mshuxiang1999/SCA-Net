@@ -85,8 +85,6 @@ def main() -> None:
             optimizer.step()
             running_loss += float(loss.detach())
 
-        # Document-topic distributions are split-specific inputs; the learned
-        # model and semantic prototype definitions remain unchanged.
         encoded = encode_split(model, val_loader, device)
         scores = score_split(model, encoded, device, args.eval_shard_size)
         metrics = retrieval_metrics(scores, val_data.captions_per_image)
