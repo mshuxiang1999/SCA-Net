@@ -77,6 +77,36 @@ data/f30k_precomp/
 
 Each `*_ims.npy` file stores Faster R-CNN region features. Captions should be ordered by image. Flickr30K and MS-COCO normally contain five captions per image.
 
+## Download Data and Vocab
+
+We follow SCAN to obtain image features and vocabularies. The prepared features can be downloaded from:
+
+```text
+https://www.kaggle.com/datasets/kuanghueilee/scan-features
+```
+
+Another download link is available below:
+
+```text
+https://drive.google.com/drive/u/0/folders/1os1Kr7HeTbh8FajBNegW8rjJf6GIhFqC
+```
+
+## Data Pre-processing (Optional)
+
+The image features of Flickr30K and MS-COCO are available in NumPy array format and can be used for training directly. However, if you wish to test on another dataset, you need to start from scratch:
+
+1. Use the bottom-up attention model to extract features of image regions. The output file format is a TSV file with the following columns: `['image_id', 'image_w', 'image_h', 'num_boxes', 'boxes', 'features']`.
+
+```text
+bottom-up-attention/tools/generate_tsv.py
+```
+
+2. Convert the TSV output above to a NumPy array.
+
+```text
+util/convert_data.py
+```
+
 ## Training
 
 ```bash
