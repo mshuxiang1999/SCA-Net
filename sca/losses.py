@@ -3,8 +3,6 @@ from torch import nn
 
 
 class HardestTripletRankingLoss(nn.Module):
-    """Equation (15), using the hardest caption and image negatives."""
-
     def __init__(self, margin: float = 0.2) -> None:
         super().__init__()
         self.margin = margin

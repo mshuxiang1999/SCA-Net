@@ -26,12 +26,6 @@ class ScoreParts:
 
 
 class SCASimilarity(nn.Module):
-    """Equations (2)-(14) of SCA-Net.
-
-    This module deliberately has one forward path for training and inference.
-    All semantic artifacts are registered buffers, so checkpoints are complete.
-    """
-
     def __init__(
         self,
         artifacts: SemanticArtifacts,

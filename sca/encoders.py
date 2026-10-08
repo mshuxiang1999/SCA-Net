@@ -7,8 +7,6 @@ from transformers import AutoModel
 
 
 class ImageRegionEncoder(nn.Module):
-    """Project Faster R-CNN region features to the paper's shared d-dimensional space."""
-
     def __init__(self, input_dim: int = 1024, embed_dim: int = 1024) -> None:
         super().__init__()
         self.projection = nn.Identity() if input_dim == embed_dim else nn.Linear(input_dim, embed_dim)
@@ -18,8 +16,6 @@ class ImageRegionEncoder(nn.Module):
 
 
 class BertWordEncoder(nn.Module):
-    """BERT/Bi-GRU is interchangeable in the paper; this is the BERT setting."""
-
     def __init__(self, model_name_or_path: str, embed_dim: int = 1024) -> None:
         super().__init__()
         self.bert = AutoModel.from_pretrained(model_name_or_path)

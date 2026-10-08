@@ -10,12 +10,6 @@ import torch
 
 @dataclass
 class SemanticArtifacts:
-    """Fixed semantic information produced by LDA and IDF.
-
-    The arrays follow the notation in Table 1 of the paper. Topic relevance
-    distributions are indexed by dataset image/caption ids.
-    """
-
     visual_concept_features: torch.Tensor
     text_concept_features: torch.Tensor
     visual_topic_concept: torch.Tensor

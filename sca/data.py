@@ -22,13 +22,6 @@ def _paper_words(caption: str, vocab: set[str]) -> list[str]:
 
 
 class PrecomputedRetrievalDataset(Dataset):
-    """Flickr30K/MS-COCO precomputed region features used by SCA-Net.
-
-    Expected files are ``<split>_caps.txt`` and ``<split>_ims.npy``. If the
-    image array has one row per image while captions have five rows per image,
-    caption ``i`` is paired with image ``i // 5``.
-    """
-
     def __init__(
         self,
         root: str | Path,
