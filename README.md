@@ -9,38 +9,6 @@ SCA-Net is an image-text retrieval model that aligns visual regions and textual 
 
 The released code follows the equations, algorithms, and implementation settings of the paper.
 
-## News
-
-- Initial code release for SCA-Net.
-- Core implementation of IDF, IDE, fragment-level alignment, instance-level alignment, score fusion, training, and evaluation.
-
-## Method Overview
-
-```text
-Image regions / Text words
-        |
-        |-------------------------------|
-        |                               |
- Initial cross-attention          Semantic prototypes
-        |                         VSPC / TSPC with LDA
-        |                               |
-        |                         IDF key dimensions
-        |                               |
-        |-------------|-----------------|
-                      |
-          |-----------|-----------|
-          |                       |
-  Fragment-level branch    Instance-level branch
-  one-to-one IDE           many-to-many IDE
-          |                       |
-        S_fra                   S_ins
-          |                       |
-          |-----------|-----------|
-                      |
-      S = lambda_1 S_ini + lambda_2 S_ins + lambda_3 S_fra
-                      |
-          hardest-negative triplet ranking loss
-```
 
 ## Requirements
 
