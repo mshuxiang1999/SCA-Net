@@ -2,6 +2,10 @@
 
 PyTorch implementation for **Semantic-aware Cross-modal Alignment via Adaptive Dimension Filtering and Expanding for Image-Text Retrieval**.
 
+
+The repository includes all the scripts, configurations, and detailed instructions on how to execute the code and reproduce our results. Once the paper is accepted, we will open-source our code.
+
+
 SCA-Net is an image-text retrieval model that aligns visual regions and textual words by modeling semantic prototypes at both fragment and instance levels. The method introduces two core modules:
 
 - **Intra-modality Dimension Filtering (IDF)** selects prototype-specific key dimensions inside each modality.
